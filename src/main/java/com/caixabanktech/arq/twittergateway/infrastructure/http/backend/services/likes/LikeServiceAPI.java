@@ -3,6 +3,7 @@ package com.caixabanktech.arq.twittergateway.infrastructure.http.backend.service
 import com.caixabanktech.arq.twittergateway.domain.services.LikeService;
 import com.caixabanktech.arq.twittergateway.infrastructure.http.backend.services.BaseServiceAPI;
 import com.caixabanktech.arq.twittergateway.infrastructure.http.backend.services.likes.requests.CreateLikeRequest;
+import com.caixabanktech.arq.twittergateway.infrastructure.http.backend.services.likes.responses.CountLikesOfTweetResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,7 +20,19 @@ public class LikeServiceAPI extends BaseServiceAPI implements LikeService {
 
     @Override
     public Long countLikesOfTweet(String tweetId) {
-        return null;
+        CountLikesOfTweetResponse response = webClient
+                .get()
+                .uri("/likes/" + tweetId + "/count")
+                .retrieve()
+                .bodyToMono(CountLikesOfTweetResponse.class)
+                .timeout(Duration.ofSeconds(5))
+                .block();
+
+        if (response == null) {
+            return 0L;
+        }
+
+        return response.getCountLikes();
     }
 
     @Override
