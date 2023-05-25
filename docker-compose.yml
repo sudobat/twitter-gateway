@@ -5,9 +5,3 @@ services:
       - MYSQL_HOST=mysql
     ports:
       - 8080:8000
-    depends_on:
-      - mysql
-  mysql:
-    image: mysql
-    volumes:
-      - C:\Users\LambdaLoopers\Desktop\twitter-mysql-data:/var/lib/mysql
