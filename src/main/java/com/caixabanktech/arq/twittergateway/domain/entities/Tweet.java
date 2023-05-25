@@ -1,7 +1,5 @@
 package com.caixabanktech.arq.twittergateway.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
@@ -14,10 +12,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class Tweet {
 
-    @Id
     private String id;
 
     @NotBlank(message = "Author is mandatory")
