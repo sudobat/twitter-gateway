@@ -44,8 +44,10 @@ public class TweetsController {
     }
 
     @PutMapping("{tweetId}")
-    public String updateTweet(@PathVariable String tweetId, String text) {
-        updateTweet.execute(tweetId, text);
+    public String updateTweet(@PathVariable(name = "tweetId") String tweetId, @RequestBody UpdateTweetRequest updateTweetRequest) {
+        updateTweet.execute(
+                tweetId,
+                updateTweetRequest.getText());
         return "OK";
     }
 

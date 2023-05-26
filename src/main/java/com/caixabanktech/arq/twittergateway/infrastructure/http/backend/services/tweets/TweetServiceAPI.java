@@ -71,7 +71,7 @@ public class TweetServiceAPI extends BaseServiceAPI implements TweetService {
     @Override
     public void updateTweet(String id, String text) {
 
-        UpdateTweetRequest request = new UpdateTweetRequest(id, text);
+        UpdateTweetRequest request = new UpdateTweetRequest(text);
 
         webClient
                 .put()
