@@ -1,4 +1,4 @@
-package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers;
+package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers.likes;
 
 import com.caixabanktech.arq.twittergateway.application.services.likes.CreateLike;
 import com.caixabanktech.arq.twittergateway.application.services.likes.DeleteLike;

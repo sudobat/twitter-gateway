@@ -1,4 +1,4 @@
-package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers;
+package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers.tweets;
 
 import com.caixabanktech.arq.twittergateway.domain.entities.Tweet;
 import com.fasterxml.jackson.annotation.JsonProperty;

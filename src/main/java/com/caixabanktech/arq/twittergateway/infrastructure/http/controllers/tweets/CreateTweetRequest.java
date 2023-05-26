@@ -1,4 +1,4 @@
-package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers;
+package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers.tweets;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
