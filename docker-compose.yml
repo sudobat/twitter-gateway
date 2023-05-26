@@ -1,7 +1,36 @@
 services:
-  backend:
+  gateway:
     image: caixabanktech/twitter-gateway
     environment:
-      - MYSQL_HOST=mysql
+      - TWEETS_SERVICE_HOST=http://tweets-service:8080
+      - LIKES_SERVICE_HOST=http://likes-service:8080
     ports:
-      - 8080:8000
+      - 8080:8080
+  tweets-service:
+    image: usuariproves/tweets-service
+    ports:
+      - 8081:8080
+  likes-service:
+    image: jguillaumes/likes-service
+    environment:
+      - SPRING_DATA_REDIS_HOST=redis
+    ports:
+      - 8082:8080
+  redis:
+    image: redis:5.0
+    container_name: redis
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 6379:6379
+  mysql-development:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: helloworld
+      MYSQL_DATABASE: twitter
+      MYSQL_USER: twitter
+      MYSQL_PASSWORD: 1234
+    ports:
+      - 3308:3306

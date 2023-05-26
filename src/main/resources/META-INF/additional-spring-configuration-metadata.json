@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "backend.hosts.tweets-service",
+      "type": "java.lang.String",
+      "description": "Description for backend.hosts.tweets-service."
+    },
+    {
+      "name": "backend.hosts.likes-service",
+      "type": "java.lang.String",
+      "description": "Description for backend.hosts.likes-service."
+    }
+  ]
+}

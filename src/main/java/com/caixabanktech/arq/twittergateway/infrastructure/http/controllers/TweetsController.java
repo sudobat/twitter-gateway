@@ -31,13 +31,16 @@ public class TweetsController {
     }
 
     @GetMapping("")
-    public List<Tweet> getTweets(int page) {
-        return getTweets.execute(page);
+    public @ResponseBody GetTweetsResponse getTweets(@RequestParam(defaultValue = "0") int page) {
+        List<Tweet> tweets = getTweets.execute(page);
+        return new GetTweetsResponse(tweets);
     }
 
     @PostMapping("")
-    public String createTweet(String text, String authorId) {
-        return createTweet.execute(text, authorId);
+    public String createTweet(@RequestBody CreateTweetRequest createTweetRequest) {
+        return createTweet.execute(
+                createTweetRequest.getText(),
+                createTweetRequest.getAuthorId());
     }
 
     @PutMapping("{tweetId}")

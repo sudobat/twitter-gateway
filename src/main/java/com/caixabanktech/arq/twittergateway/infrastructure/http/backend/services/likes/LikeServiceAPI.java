@@ -22,7 +22,7 @@ public class LikeServiceAPI extends BaseServiceAPI implements LikeService {
     public Long countLikesOfTweet(String tweetId) {
         CountLikesOfTweetResponse response = webClient
                 .get()
-                .uri("/likes/" + tweetId + "/count")
+                .uri("/tweets/" + tweetId + "/likes/count")
                 .retrieve()
                 .bodyToMono(CountLikesOfTweetResponse.class)
                 .timeout(Duration.ofSeconds(5))
@@ -42,7 +42,7 @@ public class LikeServiceAPI extends BaseServiceAPI implements LikeService {
 
         webClient
                 .post()
-                .uri("/tweets")
+                .uri("/likes")
                 .body(Mono.just(request), CreateLikeRequest.class)
                 .retrieve()
                 .bodyToMono(Void.class)
@@ -53,9 +53,12 @@ public class LikeServiceAPI extends BaseServiceAPI implements LikeService {
     @Override
     public void deleteLike(String tweetId, String authorId) {
 
+        CreateLikeRequest request = new CreateLikeRequest(tweetId, authorId);
+
         webClient
-                .delete()
-                .uri("/likes")
+                .post()
+                .uri("/likes/dislike")
+                .body(Mono.just(request), CreateLikeRequest.class)
                 .retrieve()
                 .bodyToMono(Void.class)
                 .timeout(Duration.ofSeconds(5))

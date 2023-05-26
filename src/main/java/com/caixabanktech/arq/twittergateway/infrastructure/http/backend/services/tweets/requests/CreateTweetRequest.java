@@ -9,8 +9,8 @@ import lombok.Data;
 public class CreateTweetRequest {
 
     @JsonProperty
-    private String authorId;
+    private String author;
 
     @JsonProperty
-    private String text;
+    private String desc;
 }

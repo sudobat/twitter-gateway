@@ -5,6 +5,14 @@ To update the docker image for the project, please use this command:
 ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=caixabanktech/twitter-gateway
 ```
 
+To upload the image to docker hub:
+
+```
+docker login
+docker tag local-namespace/project-name docker-username/project-name:latest
+docker push docker-username/project-name:latest
+```
+
 # Getting Started
 
 ### Reference Documentation

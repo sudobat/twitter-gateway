@@ -37,7 +37,14 @@ public class TweetServiceAPI extends BaseServiceAPI implements TweetService {
             return new ArrayList<>();
         }
 
-        return getTweetsResponse.getTweets();
+        return getTweetsResponse.getTweets().stream()
+                .map(tweetResponse -> new Tweet(
+                        tweetResponse.getId(),
+                        tweetResponse.getAuthor(),
+                        tweetResponse.getDesc(),
+                        tweetResponse.getCreatedAt(),
+                        0L))
+                .toList();
     }
 
     @Override

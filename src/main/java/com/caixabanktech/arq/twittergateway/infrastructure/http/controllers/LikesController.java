@@ -2,15 +2,10 @@ package com.caixabanktech.arq.twittergateway.infrastructure.http.controllers;
 
 import com.caixabanktech.arq.twittergateway.application.services.likes.CreateLike;
 import com.caixabanktech.arq.twittergateway.application.services.likes.DeleteLike;
-import com.caixabanktech.arq.twittergateway.application.services.likes.DeleteLikesOfTweet;
-import com.caixabanktech.arq.twittergateway.application.services.tweets.CreateTweet;
-import com.caixabanktech.arq.twittergateway.application.services.tweets.DeleteTweet;
-import com.caixabanktech.arq.twittergateway.application.services.tweets.GetTweets;
-import com.caixabanktech.arq.twittergateway.application.services.tweets.UpdateTweet;
-import com.caixabanktech.arq.twittergateway.domain.entities.Tweet;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/likes")
@@ -18,33 +13,28 @@ public class LikesController {
 
     private final CreateLike createLike;
     private final DeleteLike deleteLike;
-    private final DeleteLikesOfTweet deleteLikesOfTweet;
 
     public LikesController(
             CreateLike createLike,
-            DeleteLike deleteLike,
-            DeleteLikesOfTweet deleteLikesOfTweet) {
+            DeleteLike deleteLike) {
 
         this.createLike = createLike;
         this.deleteLike = deleteLike;
-        this.deleteLikesOfTweet = deleteLikesOfTweet;
     }
 
     @PostMapping("")
-    public String createLike(String tweetId, String authorId) {
-        createLike.execute(tweetId, authorId);
+    public String createLike(@RequestBody CreateLikeRequest createLikeRequest) {
+        createLike.execute(
+                createLikeRequest.getTweetId(),
+                createLikeRequest.getAuthorId());
         return "OK";
     }
 
     @PostMapping("unlike")
-    public String deleteLike(String tweetId, String authorId) {
-        deleteLike.execute(tweetId, authorId);
-        return "OK";
-    }
-
-    @DeleteMapping("{tweetId}/likes")
-    public String deleteLikesOfTweet(@PathVariable String tweetId) {
-        deleteLikesOfTweet.execute(tweetId);
+    public String deleteLike(@RequestBody CreateLikeRequest createLikeRequest) {
+        deleteLike.execute(
+                createLikeRequest.getTweetId(),
+                createLikeRequest.getAuthorId());
         return "OK";
     }
 }
